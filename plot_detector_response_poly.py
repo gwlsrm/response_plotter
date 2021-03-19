@@ -139,16 +139,16 @@ if __name__ == "__main__":
     assert len(polys) + 1 == len(bounds)
     
     res = np.array([])
+    egrid = np.array([])
     for i, poly_zone in enumerate(polys):
         num_points = round((bounds[i+1] - bounds[i])/(energy*1000) * NUM_POINTS)
         assert num_points <= NUM_POINTS
-        print(i, num_points)
         grid = np.linspace(0,1,num_points)
+        egrid = np.concatenate((egrid, (bounds[i+1] - bounds[i]) * grid + bounds[i]))
         p = poly(grid, poly_zone)
         res = np.concatenate((res, p))
     
     # plot poly
-    e_grid = np.linspace(0, energy, len(res))
     plt.plot(e_grid, res, 'r')
     plt.title('Compton for energy {} keV'.format(energy*1000))
     plt.xlabel('energy, MeV') 

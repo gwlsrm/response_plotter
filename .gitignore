@@ -130,3 +130,7 @@ dmypy.json
 
 # Other files
 *.csv
+*.png
+
+# folders
+pics/
